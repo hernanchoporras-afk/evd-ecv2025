@@ -1,0 +1,18 @@
+# Productos reconstruibles por el pipeline
+/resultados/
+/figuras/
+
+# Sesiones y preferencias locales
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+.Renviron
+.Rprofile
+.DS_Store
+Thumbs.db
+
+# Archivos de sistema y temporales
+*.tmp
+*.bak
+~$*
