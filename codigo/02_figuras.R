@@ -46,8 +46,8 @@ dev.off()
 
 # Figura 3: contraste principal de A-B frente al metodo sin diseno.
 a <- contrastes[1:2, ]
-png('figuras/03_contraste_diseno_vs_welch.png', width = 1900, height = 1050, res = 200)
-par(mar = c(5.7, 12.2, 4.2, 1.2), family = 'sans')
+png('figuras/03_contraste_diseno_vs_welch.png', width = 1900, height = 1250, res = 200)
+par(mar = c(8, 12.2, 4.2, 1.2), family = 'sans')
 pos <- c(2, 1)
 plot(a$estimacion, pos, xlim = range(c(0, a$li95, a$ls95)) + c(-.12,.12),
      ylim = c(.5, 2.6), yaxt = 'n', pch = 19, cex = 1.7,
