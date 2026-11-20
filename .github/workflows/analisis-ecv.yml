@@ -1,0 +1,71 @@
+name: ECV 2025 | Evidencia reproducible
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'codigo/**'
+      - 'run/**'
+      - 'datos/**'
+      - '.github/workflows/analisis-ecv.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  analisis:
+    name: Reconstruir evidencia estadistica
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Obtener fuentes
+        uses: actions/checkout@v4
+
+      - name: Preparar R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+
+      - name: Instalar paquete estadistico
+        shell: Rscript {0}
+        run: |
+          install.packages('survey', repos = getOption('repos'))
+          stopifnot(requireNamespace('survey', quietly = TRUE))
+
+      - name: Verificar disponibilidad de microdatos
+        run: Rscript --vanilla run/verificar_insumos.R
+
+      - name: Reconstruir analisis y visualizaciones
+        run: Rscript --vanilla run/analisis_completo.R
+
+      - name: Resumir resultado principal
+        shell: Rscript {0}
+        run: |
+          x <- read.csv2('resultados/inferencia/02_contrastes.csv', stringsAsFactors = FALSE)
+          principal <- x[1, ]
+          resumen <- c(
+            '## Evidencia reproducible - ECV 2025',
+            '',
+            '**Pregunta:** ¿como se asocia la suficiencia economica percibida con el rezago educativo adolescente?',
+            '',
+            sprintf('**Diferencia ponderada:** %.3f grados de rezago.', principal$estimacion),
+            sprintf('**IC del 95%%:** [%.3f; %.3f] grados.', principal$li95, principal$ls95),
+            '',
+            'La comparacion representa una asociacion estadistica bajo los supuestos del diseno utilizado; no identifica causalidad.',
+            '',
+            'Descarga el artefacto **evidencia-ecv-2025** para acceder a tablas, figuras y versiones de R.'
+          )
+          cat(paste(resumen, collapse = '\n'), file = Sys.getenv('GITHUB_STEP_SUMMARY'))
+
+      - name: Publicar evidencia como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencia-ecv-2025
+          path: |
+            resultados/
+            figuras/
+          retention-days: 30
+          if-no-files-found: error
