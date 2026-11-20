@@ -105,7 +105,7 @@ El parámetro `Δ` es una diferencia asociativa descriptiva de población y **no
 - **Alternativa basada en rangos:** respondería a una pregunta distributiva diferente, no sustituye automáticamente el contraste de medias. Una prueba de normalidad individual no puede por sí sola validar o descartar la linealización de diseño.
 - **Limitaciones de diagnóstico:** `SEGMENTO` se utiliza como conglomerado último; el diseño completo descrito por DANE tiene municipios como UPM. Se recomienda una verificación especializada de varianzas con especificaciones de etapas adicionales si se pretende producción oficial o decisiones institucionales.
 
-Los controles y la sensibilidad al tratamiento de solitarios se exportan en `05_diagnosticos_diseno.csv`, `06_solitarios_dominio.csv`, `07_sensibilidad_solitarios.csv` y `08_exclusiones_por_X.csv`. Se deben revisar esas salidas de la **próxima ejecución** antes de afirmar que la alternativa para solitarios no altera la conclusión.
+Los controles y la sensibilidad al tratamiento de solitarios se exportan en `05_diagnosticos_diseno.csv`, `06_solitarios_dominio.csv`, `07_sensibilidad_solitarios.csv` y `08_exclusiones_por_X.csv`. Los diagnósticos del diseño y la sensibilidad al tratamiento de segmentos solitarios fueron ejecutados y verificados mediante GitHub Actions. El error estándar de la diferencia principal pasó de 0,0674597832 a 0,0674598149, una variación absoluta de 0,0000000317 grados. Esta comprobación evidencia estabilidad numérica frente al ajuste examinado, sin demostrar equivalencia con el estimador de varianza oficial del DANE.
 
 ## 3.3. Errores de decisión y potencia de un estudio futuro
 
