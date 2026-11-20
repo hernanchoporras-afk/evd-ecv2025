@@ -137,7 +137,7 @@ Para el contraste principal se usa **linealización**, no bootstrap. Por ello **
 
 1. **DANE (2026), ECV 2025**, metadatos y diseño muestral: https://microdatos.dane.gov.co/index.php/catalog/905
 2. **DANE**, diccionario de variables del diseño: https://microdatos.dane.gov.co/index.php/catalog/905/data-dictionary/F30
-3. **MEN/SINIEB**, ficha oficial de tasa de extraedad (umbral institucional de dos años): https://portalsineb.mineducacion.gov.co/1782/articles-412165_Trayectoria_05_V2024.pdf
+3. **Ministerio de Educación Nacional**. (s. f.). F5. Tasa de Extraedad. Sistema de Información Nacional de Educación Básica y Media (SINEB). Fuente de datos: SIMAT: http://bi.mineducacion.gov.co:8380/eportal/web/sineb/f5.-extraedad
 4. **MEN**, modelo Aceleración del Aprendizaje (contexto, no umbral 0,5): https://www.mineducacion.gov.co/1780/w3-article-340092.html
 5. **OCDE (2024)**, *Education at a Glance*, equidad y estudiantes en extraedad: https://www.oecd.org/en/publications/education-at-a-glance-2024_c00cad36-en/full-report/equity-in-the-education-sustainable-development-goal_9d94cd1e.html
 6. **Lumley (2004)**, *Analysis of Complex Survey Samples*, *Journal of Statistical Software*, 9(8), 1–19: https://doi.org/10.18637/jss.v009.i08
