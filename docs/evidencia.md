@@ -104,7 +104,7 @@ Los archivos `resultados/inferencia/03_potencia_futura.csv`, `04_escenarios_pote
 ### Fuentes de contexto y método
 
 - [DANE, metadatos ECV 2025](https://microdatos.dane.gov.co/index.php/catalog/905).
-- [MEN, ficha de tasa de extraedad](https://portalsineb.mineducacion.gov.co/1782/articles-412165_Trayectoria_05_V2024.pdf).
+- [MEN, ficha de tasa de extraedad](http://bi.mineducacion.gov.co:8380/eportal/web/sineb/f5.-extraedad).
 - [OCDE, Education at a Glance 2024: equidad y extraedad](https://www.oecd.org/en/publications/education-at-a-glance-2024_c00cad36-en/full-report/equity-in-the-education-sustainable-development-goal_9d94cd1e.html).
 - [Lumley (2004), análisis de encuestas complejas](https://doi.org/10.18637/jss.v009.i08).
 - [Documentación técnica y plan prospectivo del proyecto](metodologia.md).
