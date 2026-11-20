@@ -42,11 +42,58 @@ Se generan en `resultados/inferencia/`:
 | `07_sensibilidad_solitarios.csv` | EE principal comparado con la opción de ajuste a solitarios del dominio |
 | `08_exclusiones_por_X.csv` | Distribución de 75 exclusiones según las tres categorías de suficiencia |
 
-Los **nuevos resultados de sensibilidad a PSU solitarias** deben inspeccionarse después de ejecutar esta versión. No se presupone que el error estándar sea idéntico bajo ambas opciones.
+La sensibilidad al tratamiento de unidades primarias de muestreo (PSU) solitarias fue ejecutada y verificada mediante GitHub Actions el 19 de noviembre de 2026.
 
-## Validar GitHub Actions
+El error estándar de la diferencia principal fue de **0,0674597832** bajo la especificación original y de **0,0674598149** al activar el ajuste alternativo, con una variación absoluta de **0,0000000317 grados**.
 
-Sube los archivos de `docs/`, `codigo/` y `run/` mediante GitHub Desktop y usa **Commit to main → Push origin**. En el workflow `ECV 2025 | Evidencia reproducible`, confirma una nueva ejecución **verde** y descarga el artifact `evidencia-ecv-2025` para revisar `05`–`08` y las tres figuras.
+Esta comprobación demuestra estabilidad numérica frente al tratamiento evaluado, pero no certifica que la estimación de varianza reproduzca íntegramente el diseño muestral oficial del DANE.
+
+
+## Reproducibilidad mediante GitHub Actions
+
+El análisis fue ejecutado y verificado en GitHub Actions el
+19 de noviembre de 2026, mediante el workflow
+`ECV 2025 | Evidencia reproducible`.
+
+La ejecución generó el artefacto `evidencia-ecv-2025`,
+que contiene las tablas de inferencia, los diagnósticos
+del diseño muestral, los escenarios prospectivos de
+potencia y las visualizaciones producidas por R.
+
+### Resultados verificados
+
+| Comprobación | Resultado |
+| --- | --- |
+| Adolescentes con rezago calculable | 7.717 |
+| Adolescentes en el contraste principal | 7.451 |
+| Diferencia ponderada estimada | 0,6361267 grados |
+| Error estándar principal | 0,06745978 |
+| IC del 95 % | [0,5038884; 0,7683650] |
+| Segmentos del marco | 8.543 |
+| Segmentos presentes en la comparación | 4.736 |
+| Estratos del marco | 356 |
+| Estratos con un único segmento en el dominio | 2 |
+
+La comprobación de sensibilidad al tratamiento de
+conglomerados solitarios produjo errores estándar de
+0,0674597832 y 0,0674598149, respectivamente.
+
+Los resultados principales también se reprodujeron
+en Windows 11 con R 4.5.3 y `survey` 4.5.
+
+### Repetir la ejecución
+
+1. Acceder a la pestaña `Actions` del repositorio.
+2. Seleccionar `ECV 2025 | Evidencia reproducible`.
+3. Ejecutar `Run workflow` sobre la rama `main`.
+4. Comprobar que la ejecución finalice correctamente.
+5. Descargar el artefacto `evidencia-ecv-2025`.
+6. Revisar las tablas de `resultados/inferencia/`
+   y las imágenes generadas en `figuras/`.
+
+Las verificaciones acreditan reproducibilidad numérica,
+pero no implican causalidad ni equivalencia automática
+con el estimador oficial del DANE.
 
 ## Criterios de interpretación
 
