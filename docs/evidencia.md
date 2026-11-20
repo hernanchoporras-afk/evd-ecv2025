@@ -15,7 +15,22 @@ El objetivo no es clasificar beneficiarios ni proponer una intervención definit
 
 **Hallazgo:** los datos son compatibles, bajo la especificación de inferencia adoptada, con una asociación positiva entre insuficiencia económica percibida y mayor rezago medio. El rechazo de la hipótesis de igualdad de medias no identifica una causa del rezago.
 
-![Medias ponderadas de rezago e intervalos de confianza del 95 %](figuras/02_medias_ponderadas_ic95.png)
+
+### Distribución observada del rezago
+
+![Distribución de grados de rezago por suficiencia
+económica](figuras/01_distribucion_grupos.png)
+
+### Medias ponderadas e incertidumbre
+
+![Medias ponderadas de rezago e intervalos de confianza
+del 95 %](figuras/02_medias_ponderadas_ic95.png)
+
+### Comparación de especificaciones inferenciales
+
+![Diferencia de medias con diseño complejo frente a
+Welch sin ponderación](figuras/03_contraste_diseno_vs_welch.png)
+
 
 **Implicación provisional:** la suficiencia percibida de ingresos merece conservarse como dimensión descriptiva prioritaria del diagnóstico. Esto **no** fundamenta por sí solo reglas de focalización de beneficiarios.
 
