@@ -83,11 +83,11 @@ La comparación inferencial principal usa **n = 7.451** (primeras dos categoría
 
 ## 5. ¿Qué control de calidad y potencia faltaba?
 
-La comprobación independiente de los CSV originales encontró: **235.350** personas en el archivo de diseño, **8.543** segmentos en **356** estratos, `FEX_C` siempre positivo y finito, **4.736** segmentos del dominio principal y **dos estratos con un único segmento observado en el dominio**. El nuevo script `codigo/03_diagnosticos_diseno.R` exporta los diagnósticos y compara el tratamiento de los estratos con un solo segmento dentro del dominio. **La magnitud de ese último contraste de errores estándar deberá consultarse en la próxima ejecución de R**; no se inventa aquí.
+La ejecución del 19 de noviembre de 2026 confirmó: **235.350** personas en el archivo de diseño, **8.543** segmentos en **356** estratos del marco, `FEX_C` positivo y finito, **4.736** segmentos del dominio principal y **dos estratos con un único segmento observado en ese dominio**. El archivo `05_diagnosticos_diseno.csv` registra estos controles. La sensibilidad del tratamiento de unidades solitarias (`07_sensibilidad_solitarios.csv`) fue efectivamente ejecutada: el error estándar pasó de **0,0674597832** a **0,0674598149**, una diferencia de **0,0000000317 grados**. El contraste principal sigue estimando **0,6361267 grados** en ambas especificaciones. Esta estabilidad se refiere solo al ajuste examinado y no valida por sí misma la reconstrucción integral del diseño DANE.
 
 Para la **planificación de una encuesta futura**, y **no** como potencia retrospectiva, el equipo plantea un escenario hipotético: `δ* = 0,5`, `α = 0,05`, desviación de planificación de **1,7261** grados (piloto ECV), grupos equilibrados y efecto de diseño **supuesto** de 2. Con aproximación normal, se requieren aproximadamente **375 personas por grupo para 80 % de potencia** o **501 por grupo para 90 %**. La validez de estos valores depende de los supuestos de diseño y de la proporción real de respuestas; no son cálculos oficiales de DANE.
 
-Los scripts producen los archivos `resultados/inferencia/03_potencia_futura.csv`, `04_escenarios_potencia.csv` y los diagnósticos `05`–`08`. Los resultados de planificación deben comprobarse en la ejecución actualizada.
+Los archivos `resultados/inferencia/03_potencia_futura.csv`, `04_escenarios_potencia.csv` y los diagnósticos `05`–`08` se generaron y verificaron en el artefacto `evidencia-ecv-2025` de GitHub Actions. Las muestras de planificación son escenarios hipotéticos, no potencias retrospectivas ni tamaños muestrales oficiales.
 
 ## 6. ¿Qué decisión cambia y cuál es la siguiente pregunta?
 
