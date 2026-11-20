@@ -75,16 +75,9 @@ alt <- extraer_contraste(modelo_alt, 'insuf', gl,
 contrastes <- rbind(principal, comp_welch, alt)
 write.csv2(contrastes, file.path(salidas, '02_contrastes.csv'), row.names = FALSE)
 
-# Proyeccion ilustrativa de potencia para un FUTURO diseno equivalente,
-# no potencia observada ni garantia en un estudio prospectivo.
-delta_min <- 0.5 # benchmark provisional: media unidad de grado
-z <- qnorm(.975)
-no_central <- delta_min / principal$error_estandar
-potencia_hipotetica <- pnorm(-z - no_central) + 1 - pnorm(z - no_central)
-write.csv2(data.frame(delta_relevante_provisional = delta_min,
-                      alpha = .05, error_estandar_supuesto = principal$error_estandar,
-                      potencia_proyectada_condicional = potencia_hipotetica),
-           file.path(salidas, '03_potencia_hipotetica.csv'), row.names = FALSE)
+# La planificacion prospectiva se realiza por separado en
+# codigo/04_potencia_futura.R. El antiguo calculo que usaba el EE de
+# esta misma muestra no se interpreta como potencia retrospectiva.
 
 # Control externo de reproduccion de los numeros calculados de manera
 # independiente con linealizacion por USM/estrato.

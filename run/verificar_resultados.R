@@ -5,7 +5,12 @@ archivos_esperados <- c(
   'resultados/inferencia/00_control_marco.csv',
   'resultados/inferencia/01_medias_diseno.csv',
   'resultados/inferencia/02_contrastes.csv',
-  'resultados/inferencia/03_potencia_hipotetica.csv',
+  'resultados/inferencia/03_potencia_futura.csv',
+  'resultados/inferencia/04_escenarios_potencia.csv',
+  'resultados/inferencia/05_diagnosticos_diseno.csv',
+  'resultados/inferencia/06_solitarios_dominio.csv',
+  'resultados/inferencia/07_sensibilidad_solitarios.csv',
+  'resultados/inferencia/08_exclusiones_por_X.csv',
   'resultados/inferencia/versiones_R.txt',
   'figuras/01_distribucion_grupos.png',
   'figuras/02_medias_ponderadas_ic95.png',
@@ -31,3 +36,25 @@ stopifnot(all(contrastes$p_bilateral >= 0 & contrastes$p_bilateral <= 1))
 # Control de regresion basado en la corrida de GitHub Actions del 19/11/2026.
 stopifnot(abs(contrastes$estimacion[1] - 0.6361267) < 0.0001)
 cat('Controles de salidas y reproduccion: OK.\n')
+
+# Verificaciones de estructura basadas en archivos y conteos efectivos.
+diag <- read.csv2('resultados/inferencia/05_diagnosticos_diseno.csv',
+                  stringsAsFactors = FALSE)
+valor <- function(nombre) {
+  v <- diag$valor[diag$indicador == nombre]
+  stopifnot(length(v) == 1L)
+  as.numeric(v)
+}
+stopifnot(valor('segmentos_marco') == 8543,
+          valor('estratos_marco') == 356,
+          valor('segmentos_comparacion') == 4736,
+          valor('estratos_comparacion') == 356,
+          valor('solitarios_comparacion') == 2,
+          valor('pesos_no_validos_marco') == 0,
+          valor('gl_diseno') == 8187)
+
+pot <- read.csv2('resultados/inferencia/03_potencia_futura.csv',
+                 stringsAsFactors = FALSE)
+stopifnot(nrow(pot) == 6L, all(pot$n_por_grupo > 0),
+          all(pot$potencia_aproximada >= 0 & pot$potencia_aproximada <= 1))
+cat('Diagnosticos del diseno y planificacion prospectiva: OK.\n')
