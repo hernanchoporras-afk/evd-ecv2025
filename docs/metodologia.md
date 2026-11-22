@@ -133,6 +133,20 @@ El código `codigo/04_potencia_futura.R` recalcula σ piloto, escenarios y tama�
 
 Para el contraste principal se usa **linealización**, no bootstrap. Por ello **no existen** réplicas `B` ni semilla de remuestreo que reportar para este análisis. Se presentan el error estándar, intervalo basado en `t_(8187; 0,975)` y valor p bilateral bajo el diseño especificado. Un bootstrap ignorando segmentos no sería apropiado.
 
+## Profundización familiar: especificación y alcance
+
+La pregunta complementaria es si la brecha de rezago asociada con insuficiencia percibida de ingresos varía por ocupación del jefe (Z1) o cantidad de menores (Z2). Para cada resultado `Y` y `Y_alt`, se ajustan por separado los modelos `survey::svyglm(Y ~ insuf * Z1)` y `survey::svyglm(Y ~ insuf * Z2)` sobre el dominio familiar, con estratos, segmentos y `FEX_C` de la aproximación de diseño. El coeficiente `insuf:Zk` mide la diferencia entre brechas económicas (grupo segundo menos grupo primero). Las brechas de cada subgrupo se construyen mediante contrastes lineales y la matriz de covarianza del modelo.
+
+También se ajustan especificaciones **aditivas** `Y ~ insuf + Z2` y `Y ~ insuf + Z1 + Z2` (y sus equivalentes para `Y_alt`). La especificación aditiva presupone una brecha económica común entre niveles de las covariables, por lo que sus coeficientes deben distinguirse de los contrastes de interacción. Los coeficientes son asociaciones condicionadas y no tienen interpretación causal.
+
+Las dos interacciones Z1/Z2 constituyen una familia de comparaciones exploratorias **dentro de cada definición del resultado**. El script aplica el procedimiento de Holm a esos dos valores p; no se interpreta como corrección universal de todas las comparaciones de la investigación ni como validación independiente, ya que el planteamiento surge de la exploración de los mismos microdatos.
+
+**Referencia t documentada:** el script original `05_heterogeneidad_familiar.R` utiliza los grados de libertad del marco completo (`8.187`); el script ampliado `06_profundizacion_y_figuras.R` utiliza los grados de libertad del dominio familiar (`4.380`). Las estimaciones puntuales Z2 coinciden, pero los intervalos y valores p presentan pequeñas diferencias por esa referencia. En el informe deben identificarse los resultados con su procedimiento y evitar combinar valores de ambas especificaciones como si usaran exactamente los mismos grados de libertad.
+
+Las interacciones no resultaron estadísticamente distinguibles de cero al 5 %; ello no demuestra homogeneidad exacta. En cambio, la asociación aditiva de Z2 con el **nivel medio** de Y fue positiva bajo los supuestos del modelo (0,2221 grados; IC del 95 % [0,0805; 0,3636]). Este hallazgo no prueba una modificación de la brecha económica por Z2, ni causalidad, ni capacidad de focalización individual.
+
+**Archivos:** `codigo/05_heterogeneidad_familiar.R` (Z2 principal) y `codigo/06_profundizacion_y_figuras.R` (Z1/Z2, sensibilidades, modelos aditivos y figuras). Ejecución integrada: `run/analisis_completo.R`; verificaciones: `run/verificar_resultados.R`.
+
 ## Fuentes verificables
 
 1. **DANE (2026), ECV 2025**, metadatos y diseño muestral: https://microdatos.dane.gov.co/index.php/catalog/905
