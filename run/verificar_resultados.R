@@ -12,6 +12,8 @@ archivos_esperados <- c(
   'resultados/inferencia/07_sensibilidad_solitarios.csv',
   'resultados/inferencia/08_exclusiones_por_X.csv',
   'resultados/inferencia/versiones_R.txt',
+  'resultados/inferencia/09_celdas_heterogeneidad_Z2.csv',
+  'resultados/inferencia/10_interaccion_Z2.csv',
   'figuras/01_distribucion_grupos.png',
   'figuras/02_medias_ponderadas_ic95.png',
   'figuras/03_contraste_diseno_vs_welch.png'
@@ -58,3 +60,40 @@ pot <- read.csv2('resultados/inferencia/03_potencia_futura.csv',
 stopifnot(nrow(pot) == 6L, all(pot$n_por_grupo > 0),
           all(pot$potencia_aproximada >= 0 & pot$potencia_aproximada <= 1))
 cat('Diagnosticos del diseno y planificacion prospectiva: OK.\n')
+
+
+# Verificar el análisis de heterogeneidad familiar (Z2)
+
+interaccion <- read.csv2(
+  'resultados/inferencia/10_interaccion_Z2.csv',
+  stringsAsFactors = FALSE
+)
+
+
+# Verificar el análisis de heterogeneidad familiar (Z2)
+
+interaccion <- read.csv2(
+  'resultados/inferencia/10_interaccion_Z2.csv',
+  stringsAsFactors = FALSE
+)
+
+celdas_z2 <- read.csv2(
+  'resultados/inferencia/09_celdas_heterogeneidad_Z2.csv',
+  stringsAsFactors = FALSE
+)
+
+stopifnot(
+  nrow(interaccion) == 3L,
+  nrow(celdas_z2) == 4L,
+  !anyNA(celdas_z2$n),
+  sum(celdas_z2$n) == 7451L,
+  all(is.finite(interaccion$estimacion)),
+  all(is.finite(interaccion$error_estandar)),
+  all(interaccion$error_estandar > 0),
+  all(interaccion$li95 < interaccion$ls95),
+  is.finite(interaccion$p_bilateral[3]),
+  interaccion$p_bilateral[3] >= 0,
+  interaccion$p_bilateral[3] <= 1
+)
+
+cat('Contraste exploratorio de heterogeneidad Z2: OK.\n')
