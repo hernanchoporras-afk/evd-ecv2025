@@ -14,9 +14,20 @@ archivos_esperados <- c(
   'resultados/inferencia/versiones_R.txt',
   'resultados/inferencia/09_celdas_heterogeneidad_Z2.csv',
   'resultados/inferencia/10_interaccion_Z2.csv',
+  'resultados/inferencia/09_interacciones_Z1_Z2.csv',
+  'resultados/inferencia/10_brechas_ajustadas.csv',
+  'resultados/inferencia/11_control_gl.csv',
+  'resultados/inferencia/12_aporte_familiar_ajustado.csv',
+  'resultados/inferencia/13_tamanios_celdas.csv',
+  'resultados/inferencia/14_modelos_profundizacion.rds',
+  'resultados/inferencia/15_versiones_profundizacion.txt',
   'figuras/01_distribucion_grupos.png',
   'figuras/02_medias_ponderadas_ic95.png',
-  'figuras/03_contraste_diseno_vs_welch.png'
+  'figuras/03_contraste_diseno_vs_welch.png',
+  'figuras/01_distribucion_grupos_ponderada.png',
+  'figuras/04_forest_sensibilidad_Y.png',
+  'figuras/05_brechas_familiares_ponderadas.png',
+  'figuras/06_diferencia_entre_brechas.png'
 )
 faltantes <- archivos_esperados[!file.exists(archivos_esperados)]
 if (length(faltantes)) stop('Faltan salidas: ', paste(faltantes, collapse = ', '))
@@ -88,3 +99,69 @@ stopifnot(
 )
 
 cat('Contraste exploratorio de heterogeneidad Z2: OK.\n')
+
+# Control de la profundizacion familiar (Z1, Z2, Y y Y_alt).
+interacciones_fam <- read.csv2(
+  'resultados/inferencia/09_interacciones_Z1_Z2.csv',
+  stringsAsFactors = FALSE
+)
+ajustadas_fam <- read.csv2(
+  'resultados/inferencia/10_brechas_ajustadas.csv',
+  stringsAsFactors = FALSE
+)
+asociaciones_fam <- read.csv2(
+  'resultados/inferencia/12_aporte_familiar_ajustado.csv',
+  stringsAsFactors = FALSE
+)
+conteos_fam <- read.csv2(
+  'resultados/inferencia/13_tamanios_celdas.csv',
+  stringsAsFactors = FALSE
+)
+control_gl_fam <- read.csv2(
+  'resultados/inferencia/11_control_gl.csv',
+  stringsAsFactors = FALSE
+)
+
+filas_interaccion <- grepl(
+  'Diferencia entre brechas', interacciones_fam$contraste,
+  fixed = TRUE
+)
+pruebas_fam <- interacciones_fam[filas_interaccion, ]
+
+stopifnot(
+  nrow(interacciones_fam) == 12L,
+  nrow(pruebas_fam) == 4L,
+  nrow(ajustadas_fam) == 4L,
+  nrow(asociaciones_fam) == 4L,
+  nrow(conteos_fam) == 8L,
+  all(is.finite(interacciones_fam$estimacion)),
+  all(is.finite(interacciones_fam$error_estandar)),
+  all(interacciones_fam$li95 < interacciones_fam$ls95),
+  all(is.finite(pruebas_fam$p_bilateral)),
+  all(pruebas_fam$p_bilateral >= 0 & pruebas_fam$p_bilateral <= 1),
+  all(is.finite(pruebas_fam$p_holm_2_interacciones)),
+  all(pruebas_fam$p_holm_2_interacciones >= pruebas_fam$p_bilateral),
+  all(pruebas_fam$p_holm_2_interacciones <= 1),
+  all(is.finite(ajustadas_fam$estimacion)),
+  all(is.finite(asociaciones_fam$estimacion)),
+  all(c('Z1', 'Z2') %in% conteos_fam$variable),
+  sum(conteos_fam$n_observado[conteos_fam$variable == 'Z1']) == 7451L,
+  sum(conteos_fam$n_observado[conteos_fam$variable == 'Z2']) == 7451L,
+  control_gl_fam$valor[
+    control_gl_fam$indicador == 'GL_marco_completo'
+  ] == 8187,
+  control_gl_fam$valor[
+    control_gl_fam$indicador == 'GL_diseno_subpoblacion'
+  ] == 4380
+)
+
+# Los dos scripts de Z2 deben coincidir en estimaciones puntuales.
+z2_nuevo <- pruebas_fam[
+  pruebas_fam$resultado == 'Y' & pruebas_fam$variable == 'Z2',
+]
+stopifnot(
+  nrow(z2_nuevo) == 1L,
+  abs(z2_nuevo$estimacion - interaccion$estimacion[3]) < 0.000001
+)
+
+cat('Profundizacion familiar y figuras adicionales: OK.\n')
