@@ -12,6 +12,7 @@ source('codigo/03_diagnosticos_diseno.R', encoding = 'UTF-8')
 source('codigo/04_potencia_futura.R', encoding = 'UTF-8')
 source('codigo/05_heterogeneidad_familiar.R', encoding = 'UTF-8')
 source('codigo/02_figuras.R', encoding = 'UTF-8')
+source('codigo/06_profundizacion_y_figuras.R', encoding = 'UTF-8')
 source('run/verificar_resultados.R', encoding = 'UTF-8')
 
 cat('\nAnalisis ECV 2025 completado. Ver resultados/ y figuras/.\n')
