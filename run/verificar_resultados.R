@@ -61,15 +61,6 @@ stopifnot(nrow(pot) == 6L, all(pot$n_por_grupo > 0),
           all(pot$potencia_aproximada >= 0 & pot$potencia_aproximada <= 1))
 cat('Diagnosticos del diseno y planificacion prospectiva: OK.\n')
 
-
-# Verificar el análisis de heterogeneidad familiar (Z2)
-
-interaccion <- read.csv2(
-  'resultados/inferencia/10_interaccion_Z2.csv',
-  stringsAsFactors = FALSE
-)
-
-
 # Verificar el análisis de heterogeneidad familiar (Z2)
 
 interaccion <- read.csv2(
