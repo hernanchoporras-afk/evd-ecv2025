@@ -38,8 +38,7 @@ for (z in c('Z1', 'Z2')) {
 }
 n_muestra <- nrow(obs)
 if (n_muestra != 7451L) {
-  warning('La muestra nueva es de ', n_muestra,
-          ' adolescentes, no de 7451. Revisar exclusiones antes de comparar.')
+  stop('La muestra del análisis complementario no coincide con los 7451 adolescentes.')
 }
 gl_diseno <- survey::degf(d_fam)
 if (!is.finite(gl_diseno) || gl_diseno <= 0) {
