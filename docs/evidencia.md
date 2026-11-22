@@ -95,11 +95,32 @@ Los archivos `resultados/inferencia/03_potencia_futura.csv`, `04_escenarios_pote
 | --- | --- | --- | --- |
 | ¿Existe brecha por ingresos percibidos? | Diferencia positiva, 0,6361 [0,5039; 0,7684] | Conservar `P9090` como variable de caracterización | Examinar composición y contexto familiar |
 | ¿El resultado depende de la medida? | Diferencia alternativa 0,5144 [0,4002; 0,6285] | No sostener magnitud > 0,5 de modo robusto | Revisar la definición de escolaridad, exclusiones y sensibilidad |
-| ¿Hay diferencias entre hogares? | La Parte 1 sugiere heterogeneidad exploratoria | Conservar `Z1` y `Z2` como preguntas, no como criterios automáticos | Probar **directamente** interacciones/diferencias de brechas con diseño si el equipo lo justifica |
+| ¿La brecha económica cambia por condiciones familiares? | Interacciones Z1: p = 0,4666; Z2: p = 0,2673 (Y principal) | No hay evidencia suficiente de que la brecha económica sea distinta entre subgrupos; esto no demuestra igualdad | Validar en otra edición y precisar la aportación contextual de Z2 |
 
 **Siguiente pregunta:** ¿la asociación de suficiencia económica percibida con el rezago tiene magnitudes distintas según la ocupación del jefe y el número de menores residentes, o la heterogeneidad observada se debe a variación muestral y composición de hogares?
 
-**Límites:** estudio transversal; rezago construido por el equipo; percepción subjetiva de ingresos; resultados exploratorios sobre datos previamente examinados; incertidumbre condicionada al diseño operativo de USM y estratos, sin reproducción completa de las dos etapas de la ECV; no hay identificación causal. La etapa complementaria del equipo se incorporará únicamente cuando sus resultados y justificación sean reproducibles.
+**Límites:** estudio transversal; rezago construido por el equipo; percepción subjetiva de ingresos; resultados exploratorios sobre datos previamente examinados; incertidumbre condicionada al diseño operativo de USM y estratos, sin reproducción completa de las dos etapas de la ECV; no hay identificación causal. La etapa complementaria de interacciones Z1/Z2 y modelos ajustados fue ejecutada y sus salidas son reproducibles; su naturaleza es exploratoria y depende del diseño aproximado de encuesta especificado.
+
+## 7. Profundización inferencial: ocupación y composición familiar
+
+Se estimaron modelos de interacción `Y ~ insuf * Z1` y `Y ~ insuf * Z2`, además de las variantes con `Y_alt`, mediante `survey::svyglm()` y el dominio de 7.451 adolescentes. La interacción contrasta **directamente la diferencia entre las brechas económicas** de dos subgrupos; comparar por separado la significancia de cada brecha no serviría como prueba de heterogeneidad.
+
+| Resultado | Interacción: diferencia de brechas (grados) | IC del 95 % | p bilateral |
+| --- | ---: | --- | ---: |
+| Y, ocupación del jefe (Z1) | +0,1374 | [-0,2325; 0,5073] | 0,4666 |
+| Y, cantidad de menores (Z2) | -0,1877 | [-0,5193; 0,1439] | 0,2673 |
+| Y_alt, ocupación del jefe (Z1) | +0,0393 | [-0,2827; 0,3613] | 0,8110 |
+| Y_alt, cantidad de menores (Z2) | -0,1284 | [-0,4218; 0,1651] | 0,3911 |
+
+Para cada definición de Y, el procedimiento aplica corrección de Holm a las **dos interacciones exploratorias** (Z1 y Z2). Los p ajustados para Y son 0,5346 en ambos contrastes. No se identificó evidencia estadística suficiente de diferencias entre brechas; esto no equivale a demostrar ausencia de heterogeneidad.
+
+Como descripción condicionada, las brechas económicas estimadas con Y fueron 0,5248 y 0,6622 grados para jefes no ocupados y ocupados, y 0,7248 y 0,5372 para hogares con uno y con dos o más menores, respectivamente.
+
+En el modelo **aditivo** `Y ~ insuf + Z1 + Z2`, la brecha económica ajustada fue **0,5969 grados**, IC del 95 % [0,4580; 0,7358]. En ese mismo modelo, el contraste de Z2 (dos o más menores menos uno) fue **+0,2221 grados**, IC del 95 % [0,0805; 0,3636], p = 0,0021. Esta es una **asociación con el nivel del rezago, ajustada por las otras variables**, y no una interacción, efecto causal ni prueba de que Z2 deba utilizarse para focalización individual.
+
+**Decisión diagnóstica:** conservar P9090 como dimensión económica informativa; mantener Z1 como contexto y Z2 como variable familiar a profundizar; no atribuir diferencias de brechas entre subgrupos que el contraste directo no ha identificado con suficiente precisión. Los resultados son exploratorios y no constituyen validación independiente respecto a la Parte 1.
+
+**Fuentes reproducibles:** `09_interacciones_Z1_Z2.csv`, `10_brechas_ajustadas.csv`, `11_control_gl.csv`, `12_aporte_familiar_ajustado.csv`, `13_tamanios_celdas.csv` y las figuras 04–06 del artefacto `evidencia-ecv-2025`.
 
 ### Fuentes de contexto y método
 
