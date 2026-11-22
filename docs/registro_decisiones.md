@@ -26,8 +26,8 @@ Este registro documenta cambios y criterios **del estudio**, sin dividirlo en ta
 
 1. **Retroalimentación real de la Parte 1:** incorporar la tabla del punto 1 usando exclusivamente las observaciones efectivamente recibidas; no inventar comentarios del profesor.
 2. **Pertinencia de la especificación del diseño:** los controles y la sensibilidad de unidades solitarias **ya se ejecutaron y verificaron**; queda documentar el alcance de la aproximación a las etapas de selección descritas por DANE y evitar presentarla como estimador oficial idéntico.
-3. **Técnica complementaria, punto 6:** el equipo debe decidir si tiene una necesidad justificada de segmentación/ACP u otra, o argumentar por qué no hace falta, y registrarlo con alternativas y evidencia.
-4. **Heterogeneidad por `Z1` y `Z2`:** no inferir diferencias entre brechas a partir de p-valores por subgrupo; usar contrastes directos si se incorporan al proyecto.
+3. **Técnica complementaria, punto 6: realizada.** Se ejecutaron interacciones Z1/Z2, sensibilidad con Y_alt y modelos aditivos; falta integrar sus hallazgos en el informe de Overleaf, sin presentar ACP o segmentación no aplicados.
+4. **Heterogeneidad por Z1 y Z2: contrastada.** Los contrastes directos no aportan evidencia suficiente de diferencias entre brechas; no se concluye igualdad de subgrupos. Se mantienen verificaciones posteriores de estabilidad y validez externa.
 5. **Síntesis, límites y siguiente dato, puntos 8–10:** integrar el análisis de todos los integrantes y verificar que no se contradigan población, medidas o inferencias.
 
 ## Criterio de lectura
@@ -35,7 +35,7 @@ Este registro documenta cambios y criterios **del estudio**, sin dividirlo en ta
 - **Observado:** patrones descriptivos y exclusiones de la muestra ECV.
 - **Inferido bajo supuestos:** medias y contrastes ponderados con estratos y segmentos declarados.
 - **Comprobado:** sensibilidad numérica al ajuste de unidades solitarias del dominio, además de los escenarios de potencia prospectiva.
-- **Pendiente:** profundización familiar, justificación sustantiva acordada del criterio de 0,5 grados y discusión de validez externa del procedimiento de varianza.
+- **Pendiente:** validación externa y sustantiva del criterio 0,5, revisión especializada de la varianza y contraste con datos educativos independientes; la profundización familiar ya fue ejecutada.
 - **No demostrado:** causalidad, impacto de políticas y un umbral institucional de 0,5 grados.
 
 **Secuencia:** pregunta → evidencia → interpretación → decisión diagnóstica → nueva pregunta.
