@@ -10,6 +10,7 @@ source('codigo/00_preparar_datos.R', encoding = 'UTF-8')
 source('codigo/01_inferencia.R', encoding = 'UTF-8')
 source('codigo/03_diagnosticos_diseno.R', encoding = 'UTF-8')
 source('codigo/04_potencia_futura.R', encoding = 'UTF-8')
+source('codigo/05_heterogeneidad_familiar.R', encoding = 'UTF-8')
 source('codigo/02_figuras.R', encoding = 'UTF-8')
 source('run/verificar_resultados.R', encoding = 'UTF-8')
 
