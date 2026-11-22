@@ -28,6 +28,8 @@ El procedimiento parte de los microdatos CSV originales de DANE en `datos/` y pr
 | `codigo/04_potencia_futura.R` | Construye **escenarios prospectivos** de tamaño muestral y potencia; no potencia observada |
 | `codigo/02_figuras.R` | Genera tres imágenes a partir de los microdatos |
 | `run/verificar_resultados.R` | Verifica integridad y cifras clave del proceso |
+| `codigo/05_heterogeneidad_familiar.R` | Contrasta directamente la interacción de ingresos percibidos con Z2 para Y |
+| `codigo/06_profundizacion_y_figuras.R` | Añade interacciones por Z1/Z2 para Y e Y_alt, ajustes aditivos y nuevas figuras |
 
 ## Archivos nuevos de verificación
 
@@ -41,6 +43,14 @@ Se generan en `resultados/inferencia/`:
 | `06_solitarios_dominio.csv` | Conteos de segmentos solitarios en marco, dominio y cada grupo |
 | `07_sensibilidad_solitarios.csv` | EE principal comparado con la opción de ajuste a solitarios del dominio |
 | `08_exclusiones_por_X.csv` | Distribución de 75 exclusiones según las tres categorías de suficiencia |
+| `09_celdas_heterogeneidad_Z2.csv` y `10_interaccion_Z2.csv` | Conteos y contraste inicial Z2 |
+| `09_interacciones_Z1_Z2.csv` | Doce contrastes: brechas por grupo e interacciones Z1/Z2 para Y e Y_alt, incluidos p de Holm |
+| `10_brechas_ajustadas.csv` | Brechas económicas de modelos aditivos |
+| `11_control_gl.csv` | Tamaño del dominio y referencias de grados de libertad |
+| `12_aporte_familiar_ajustado.csv` | Coeficientes familiares de modelos aditivos |
+| `13_tamanios_celdas.csv` | Conteos de las ocho celdas Z1/Z2 por suficiencia económica |
+| `14_modelos_profundizacion.rds` | Objetos de modelos y tablas para auditoría en R |
+| `15_versiones_profundizacion.txt` | Versiones de R y paquetes de la profundización |
 
 La sensibilidad al tratamiento de unidades primarias de muestreo (PSU) solitarias fue ejecutada y verificada mediante GitHub Actions el 19 de noviembre de 2026.
 
@@ -48,6 +58,9 @@ El error estándar de la diferencia principal fue de **0,0674597832** bajo la es
 
 Esta comprobación demuestra estabilidad numérica frente al tratamiento evaluado, pero no certifica que la estimación de varianza reproduzca íntegramente el diseño muestral oficial del DANE.
 
+## Profundización familiar reproducible
+
+Los scripts `05` y `06` corren dentro de `run/analisis_completo.R`. Los nuevos CSV y las figuras `01_distribucion_grupos_ponderada.png`, `04_forest_sensibilidad_Y.png`, `05_brechas_familiares_ponderadas.png` y `06_diferencia_entre_brechas.png` quedan en el artefacto de GitHub Actions. La estimación puntual inicial de interacción Z2 se coteja con la segunda implementación. El script `06` utiliza 4.380 grados de libertad del dominio, mientras que el `05` reporta 8.187 del marco; se conserva esa distinción en la documentación. Los resultados son exploratorios y no prueban ausencia de heterogeneidad ni causalidad.
 
 ## Reproducibilidad mediante GitHub Actions
 
